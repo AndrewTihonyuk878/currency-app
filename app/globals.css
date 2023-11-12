@@ -1,27 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+html {
+  line-height: 1.15;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "RocknRoll One", sans-serif;
+}
+
+@layer base {
+  h1 {
+    @apply font-bold text-3xl text-center text-white-100;
+  }
+  a {
+    @apply underline font-bold;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+input,
+select {
+  background: none;
+  border: 0;
+  color: #fff;
+  outline: none;
+}
+
+select option {
+  color: #000;
+}
+
+.currency__table {
+  margin-top: 40px;
+  table-layout: fixed;
+  width: 50%;
+  border-collapse: collapse;
+  color: #000;
+  padding: 10px;
+}
+
+thead {
+  display: table-header-group;
+}
+
+thead th {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+thead th,
+tbody td {
+  display: table-cell;
+  padding: 5px 10px;
+  position: relative;
+}
+
+thead th:nth-child(1) {
+  width: 30%;
+}
+
+thead th:nth-child(2) {
+  width: 20%;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #e3e3e3;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f3f3f3;
 }
