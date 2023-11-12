@@ -11,8 +11,8 @@ const About = () => {
       transition={{ type: "spring", duration: 1 }}
       whileHover={{ scale: 1.1 }}
     >
-      The biggest risk is not taking any risk. In a world that's changing really
-      quickly, the only strategy that is guaranteed to fail is not taking risks.
+      I believe that our whole life is a constant continuous development, where
+      our attention, there's our energy, and that in our life increases..
     </motion.p>
   );
 };
