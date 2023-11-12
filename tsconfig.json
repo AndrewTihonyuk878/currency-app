@@ -30,7 +30,7 @@
     "app/(components)/Nav.tsx",
     "app/layout.js",
     "app/page.tsx",
-    "app/Rates/page.tsx",
+    "app/rates/page.tsx",
     "app/layout.jsx"
   ],
   "exclude": ["node_modules"]

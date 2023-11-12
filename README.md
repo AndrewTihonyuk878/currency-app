@@ -1,8 +1,6 @@
 # CURRENCY APP
 
-Todo List App with Redux and React with Awesome animation using Framer motion.
-
-[Link](https://todo-app-pink-five.vercel.app/)
+Currency App with React, Redux, NEXTJS and TypeScript with Awesome animation using Framer motion and Canvas.
 
 ---
 
@@ -13,7 +11,7 @@ In the project directory, you can run:
 1. Clone the repository
 
 ```
-git clone https://github.com/AndrewTihonyuk878/todo-app.git
+git clone https://github.com/AndrewTihonyuk878/currency-app
 ```
 
 2. Install all packages
@@ -39,4 +37,4 @@ npm test
 
 ## Preview:
 
-<img src="./src/assets/todoapp_image.png" alt="Jokes Card" />
+<img src="./app//assets/currency-app.png" alt="Currency App" />

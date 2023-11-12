@@ -25,7 +25,11 @@ const Rates = () => {
     fetchRates();
   }, []);
 
-  function changeRatesAmount(obj: object, amount: number, currency: string) {
+  function changeRatesAmount(
+    obj: object,
+    amount: number,
+    currency: string
+  ): object {
     let changedObject = Object.fromEntries(
       Object.entries(obj).map(([key, value]) => [
         key,

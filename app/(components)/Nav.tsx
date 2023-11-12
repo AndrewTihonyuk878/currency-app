@@ -7,8 +7,8 @@ const Nav = () => {
         <Link href="/">My Site</Link>
         <div className="flex gap-10">
           <Link href="/">Home</Link>
-          <Link href="/Rates">Rates</Link>
-          <Link href="/About">About</Link>
+          <Link href="/rates">Rates</Link>
+          <Link href="/about">About</Link>
         </div>
       </nav>
     </header>
