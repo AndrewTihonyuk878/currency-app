@@ -1,6 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { SectionWrapper } from "./hoc";
 import { getRates } from "./request/rates";
@@ -17,9 +18,31 @@ const Home = () => {
   const [currency1, setCurrency1] = React.useState<string>("USD");
   const [currency2, setCurrency2] = React.useState<string>("USD");
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   useEffect(() => {
+    const firstCurrency = searchParams.get("firstCurrency");
+    const secondCurrency = searchParams.get("secondCurrency");
+    if (firstCurrency) {
+      setCurrency1(firstCurrency);
+    }
+    if (secondCurrency) {
+      setCurrency2(secondCurrency);
+    }
+    console.log(firstCurrency, secondCurrency);
     const fetchRates = async () => {
-      const res = await getRates();
+      const res = await getRates(firstCurrency ? secondCurrency : "USD");
       setRates(res.data);
     };
     fetchRates();
@@ -37,6 +60,7 @@ const Home = () => {
   function handleCurrency1Change(currency1: string) {
     setAmount2(format((amount1 * rates[currency2]) / rates[currency1]));
     setCurrency1(currency1);
+    router.push("/" + "?" + createQueryString("firstCurrency", currency1));
   }
 
   function handleAmount2Change(amount2: number) {
@@ -47,6 +71,7 @@ const Home = () => {
   function handleCurrency2Change(currency2: string) {
     setAmount1(format((amount2 * rates[currency1]) / rates[currency2]));
     setCurrency2(currency2);
+    router.push("/" + "?" + createQueryString("secondCurrency", currency2));
   }
 
   return (

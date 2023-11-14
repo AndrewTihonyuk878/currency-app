@@ -1,8 +1,9 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactCountryFlag from "react-country-flag";
 import { motion } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import CurrencyInput from "../(components)/CurrencyInput";
 import { getAllRates, setAmount, setCurrency } from "../redux/currencySlice";
@@ -17,9 +18,26 @@ const Rates = () => {
   const amount = useSelector((state: RootState) => state.currency.amount);
   const currency = useSelector((state: RootState) => state.currency.currency);
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   useEffect(() => {
+    const baseCurrency = searchParams.get("baseCurrency");
+    if (baseCurrency) {
+      dispatch(setCurrency(baseCurrency));
+    }
     const fetchRates = async () => {
-      const res = await getRates();
+      const res = await getRates(baseCurrency ? baseCurrency : "USD");
       dispatch(getAllRates(res.data));
     };
     fetchRates();
@@ -49,6 +67,7 @@ const Rates = () => {
       ])
     );
     dispatch(getAllRates(changedObject));
+    router.push(currency);
 
     return changedObject;
   }
@@ -61,6 +80,7 @@ const Rates = () => {
   function handleCurrencyChange(currency: string) {
     changeRatesCurrency(rates, currency, amount);
     dispatch(setCurrency(currency));
+    router.push("rates" + "?" + createQueryString("baseCurrency", currency));
   }
 
   return (
